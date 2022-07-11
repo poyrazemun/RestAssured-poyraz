@@ -8,6 +8,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.*;//bunun sayesinde Restassure.get yazmadan sadece get yazarak isimizi hallediyoruz.!!!!
+
 public class HrGetRequests {
 
 
@@ -22,7 +24,7 @@ public class HrGetRequests {
     @Test
     public void test1() {
 
-        Response response = RestAssured.get("/regions");
+        Response response = get("/regions");
 
         System.out.println(response.statusCode());
 
@@ -40,7 +42,7 @@ public class HrGetRequests {
     @Test
     public void test2(){
 
-        Response response = RestAssured.given().accept(ContentType.JSON).when().get("/regions/2");
+        Response response = given().accept(ContentType.JSON).when().get("/regions/2");
 
         Assertions.assertEquals(200,response.statusCode());
         Assertions.assertEquals("application/json",response.contentType());
