@@ -94,6 +94,7 @@ public class SpartanGetRequests {
 
         // System.out.println("response.getHeader(\"Content-Length\") = " + response.getHeader("Content-Length"));
 
+        //Assertions.assertEquals("17", response.getHeader("Content-Length"));
         Assertions.assertEquals("17", response.header("Content-Length"));
 
         Assertions.assertEquals("Hello from Sparta", response.body().asString());
