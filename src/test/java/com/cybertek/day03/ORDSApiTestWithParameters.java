@@ -1,5 +1,6 @@
 package com.cybertek.day03;
 
+import com.cybertek.utilities.HRTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.Assertions;
@@ -9,16 +10,9 @@ import org.junit.jupiter.api.Test;
 
 import static io.restassured.RestAssured.*;
 
-public class ORDSApiTestWithParameters {
+public class ORDSApiTestWithParameters extends HRTestBase {
 
-    @BeforeAll
-    public static void init() {
-        //save baseurl inside this variable so that we dont need to type each http method.
-        baseURI = "http://3.83.68.127:1000/ords/hr";
-    }
-
-
-     /*
+    /*
         Given accept type is Json
         And parameters: q = {"region_id":2}
         When users sends a GET request to "/countries"
@@ -51,22 +45,20 @@ public class ORDSApiTestWithParameters {
 
     @DisplayName("GET request to /employees with Query Param")
     @Test
-    public void test2(){
+    public void test2() {
 
         Response response = given().accept(ContentType.JSON)
-                .and().queryParam("q","{\"job_id\":\"IT_PROG\"}")
+                .and().queryParam("q", "{\"job_id\":\"IT_PROG\"}")
                 .when().get("/employees");
 
-        Assertions.assertEquals(200,response.statusCode());
-        Assertions.assertEquals("application/json",response.header("Content-Type"));
+        Assertions.assertEquals(200, response.statusCode());
+        Assertions.assertEquals("application/json", response.header("Content-Type"));
         Assertions.assertTrue(response.body().asString().contains("IT_PROG"));
 
         response.prettyPrint();
 
 
-
     }
-
 
 
 }
