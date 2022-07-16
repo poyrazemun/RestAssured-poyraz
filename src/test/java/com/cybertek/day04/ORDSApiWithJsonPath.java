@@ -44,7 +44,7 @@ public class ORDSApiWithJsonPath extends HRTestBase {
 
     }
 
-    @DisplayName("Get reques /employees with query param")
+    @DisplayName("Get request /employees with query param")
     @Test
     public void test2(){
 
