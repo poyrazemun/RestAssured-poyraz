@@ -54,8 +54,33 @@ public class ORDSApiTestWithPath extends HRTestBase {
         List<Integer> regionIDs = response.path("items.region_id");
 
         for (Integer eachRegionID : regionIDs) {
-                Assertions.assertEquals(2,eachRegionID);
+            Assertions.assertEquals(2, eachRegionID);
         }
+
+    }
+
+    @DisplayName("GET request to /employees with Query Param")
+    @Test
+    public void test2() {
+        Response response = given().accept(ContentType.JSON)
+                .and().queryParam("q", "{\"job_id\": \"IT_PROG\"}")
+                .when().get("/employees");
+
+        Assertions.assertEquals(200, response.statusCode());
+        Assertions.assertEquals("application/json", response.header("Content-Type"));
+        Assertions.assertTrue(response.body().asString().contains("IT_PROG"));
+
+        //make sure we have only IT_PROG as a job_id
+
+        List<String> jobIDs = response.path("items.job_id");
+
+        for (String eachJobID : jobIDs) {
+
+            System.out.println(eachJobID);
+            Assertions.assertEquals("IT_PROG", eachJobID);
+
+        }
+
 
     }
 
