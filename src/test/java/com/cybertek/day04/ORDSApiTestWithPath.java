@@ -82,6 +82,15 @@ public class ORDSApiTestWithPath extends HRTestBase {
         }
 
 
+        //print each name of IT_PROGS
+
+        List<String> names = response.path("items.first_name");
+
+        for (String eachName : names) {
+            System.out.println(eachName);
+        }
+
+
     }
 
 
