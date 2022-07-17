@@ -58,6 +58,7 @@ public class ORDSHamcrestTest extends HRTestBase {
                 .body("items.job_id", everyItem(is("IT_PROG")))
                 .extract().jsonPath();
 
+        //extract() --> method that allow us to get response object after we use then() method.
 
         //assert that we have only 5 firstnames
 
