@@ -38,7 +38,7 @@ public class JSONtoJavaTest extends SpartanTestBase {
     @Test
     public void getAllSpartan() {
 
-        Response response = given().when().get("/api/spartans");
+        Response response = get("/api/spartans").then().statusCode(200).extract().response();
 
         List<Map<String, Object>> jsonList = response.as(List.class);
 
