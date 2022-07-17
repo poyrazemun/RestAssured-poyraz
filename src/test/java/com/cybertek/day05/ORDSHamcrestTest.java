@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
 
@@ -58,8 +59,9 @@ public class ORDSHamcrestTest extends HRTestBase {
                 .extract().jsonPath();
 
 
+        //assert that we have only 5 firstnames
 
-
+        assertThat(jsonPath.getList("items.first_name"), hasSize(5));
 
 
     }
