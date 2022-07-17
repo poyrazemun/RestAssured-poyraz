@@ -1,4 +1,5 @@
 package com.cybertek.day05;
+
 import com.cybertek.utilities.SpartanTestBase;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
@@ -10,27 +11,27 @@ import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
 import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 public class JSONtoJavaTest extends SpartanTestBase {
 
     @DisplayName("GET one Spartan and deserialize to Map")
     @Test
-    public void oneSpartanToMap(){
+    public void oneSpartanToMap() {
 
         Response response = given().pathParam("id", 67)
                 .when().get("/api/spartans/{id}")
                 .then().statusCode(200).extract().response();
 
-        Map<String,Object> jsonMap = response.as(Map.class);
+        Map<String, Object> jsonMap = response.as(Map.class);
 
         System.out.println(jsonMap.toString());
 
+        String actualName = (String) jsonMap.get("name");
+        assertThat(actualName, is("Janette"));
+
 
     }
-
-
-
-
 
 
 }
