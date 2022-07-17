@@ -14,8 +14,18 @@ public class DBUtils {
 
     public static void createConnection() {
         String dbUrl = "jdbc:oracle:thin:@3.83.68.127:1521:XE";
-        String dbUsername = "hr";
-        String dbPassword = "hr";
+        String dbUsername = "SP";
+        String dbPassword = "SP";
+        try {
+            connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void createConnection(String dbUrl,String dbUsername,String dbPassword) {
+
         try {
             connection = DriverManager.getConnection(dbUrl, dbUsername, dbPassword);
         } catch (SQLException e) {
