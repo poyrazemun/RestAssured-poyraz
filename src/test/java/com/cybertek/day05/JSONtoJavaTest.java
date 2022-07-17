@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
 import java.util.Map;
 
 import static org.hamcrest.Matchers.*;
@@ -29,6 +30,22 @@ public class JSONtoJavaTest extends SpartanTestBase {
 
         String actualName = (String) jsonMap.get("name");
         assertThat(actualName, is("Janette"));
+
+
+    }
+
+    @DisplayName("GET all spartans to JAVA data structure")
+    @Test
+    public void getAllSpartan() {
+
+        Response response = given().when().get("/api/spartans");
+
+        List<Map<String, Object>> jsonList = response.as(List.class);
+
+        System.out.println(jsonList.get(1).get("name"));
+
+        Map<String, Object> spartan3 = jsonList.get(2);
+        System.out.println(spartan3);
 
 
     }
