@@ -3,6 +3,7 @@ package com.cybertek.day06;
 import com.cybertek.pojo.Spartan;
 import com.cybertek.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -26,14 +27,22 @@ public class SpartanPojoGetRequest extends SpartanTestBase {
         //De serialize --> JSON to POJO (java custom class)
         //2 different way to do this
         //1.using as() method
+        //we convert json response to spartan object with the help of jackson
+        //as() method uses jackson to de serialize(converting JSON to Java class)
         Spartan spartan15 = response.as(Spartan.class);
         System.out.println(spartan15);
         System.out.println(spartan15.getGender());
         System.out.println(spartan15.getId());
 
 
-        //we convert json response to spartan object with the help of jackson
-        //as() method uses jackson to de serialize(converting JSON to Java class)
+        //second way of deserialize json to java
+        //2.using JsonPath to deserialize to custom class
+
+        JsonPath jsonPath = response.jsonPath();
+        Spartan s15 = jsonPath.getObject("", Spartan.class);
+        System.out.println(s15);
+        System.out.println(s15.getName());
+        System.out.println(s15.getPhone());
 
 
     }
