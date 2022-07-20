@@ -2,6 +2,8 @@ package com.cybertek.day07;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
+
+import com.cybertek.pojo.Spartan;
 import com.cybertek.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -84,6 +86,34 @@ public class SpartanPostRequest extends SpartanTestBase {
         assertThat(response.path("data.gender"),is("Female"));
         assertThat(response.path("data.phone"),is(85256623333l));
 
+
+
+    }
+
+    @DisplayName("POST with Map to Spartan Class")
+    @Test
+    public void postMethod3(){
+        //create one object from your pojo, send it as a JSON
+
+        Spartan spartan = new Spartan();
+        spartan.setName("Matt");
+        spartan.setGender("Male");
+        spartan.setPhone(125635478999l);
+
+        Response response = given().accept(ContentType.JSON).and().contentType(ContentType.JSON)
+                .body(spartan).log().all()//direkt body'nin icine create ettigim spartan objectimi koyabiliyorum
+                .when().post("/api/spartans");
+
+        assertThat(response.statusCode(),is(201));
+        assertThat(response.contentType(),is("application/json"));
+
+        String expectedResponseMessage = "A Spartan is Born!";
+
+        assertThat(response.path("success"),is(expectedResponseMessage));
+
+        assertThat(response.path("data.name"),is("Matt"));
+        assertThat(response.path("data.gender"),is("Male"));
+        assertThat(response.path("data.phone"),is(125635478999l));
 
 
     }
