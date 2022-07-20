@@ -2,7 +2,6 @@ package com.cybertek.day07;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-
 import com.cybertek.pojo.Spartan;
 import com.cybertek.utilities.SpartanTestBase;
 import com.cybertek.utilities.SpartanUtils;
@@ -10,10 +9,8 @@ import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -122,7 +119,7 @@ public class SpartanPostRequest extends SpartanTestBase {
     @Test
     public void test3point5() {
 
-        Map<String,Object> spartan = SpartanUtils.postSpartan();
+        Map<String, Object> spartan = SpartanUtils.postSpartan();
 
         Response response = given().accept(ContentType.JSON).and().contentType(ContentType.JSON)
                 .body(spartan).log().all()
@@ -139,7 +136,7 @@ public class SpartanPostRequest extends SpartanTestBase {
         assertThat(response.path("data.gender"), is("Female"));
         assertThat(response.path("data.phone"), is(spartan.get("phone")));
 
-      //  System.out.println(SpartanUtils.postSpartan());
+        //  System.out.println(SpartanUtils.postSpartan());
 
 
     }
@@ -166,7 +163,7 @@ public class SpartanPostRequest extends SpartanTestBase {
                 .extract().jsonPath().getInt("data.id");
 
 
-                //send a get request to id
+        //send a get request to id
 
         System.out.println(idFromPost);
 
@@ -175,21 +172,9 @@ public class SpartanPostRequest extends SpartanTestBase {
                 .when().get("api/spartans/{id}")
                 .then().statusCode(200).extract().as(Spartan.class);
 
-        assertThat(spartanPosted.getName(),is(spartan.getName()));
-        assertThat(spartanPosted.getGender(),is(spartan.getGender()));
-        assertThat(spartanPosted.getPhone(),is(spartan.getPhone()));
-        assertThat(spartanPosted.getId(),is(idFromPost));
-
-
-
-
-        /*assertThat(response.path("success"), is(expectedResponseMessage));
-
-        assertThat(response.path("data.name"), is("Matt"));
-        assertThat(response.path("data.gender"), is("Male"));
-        assertThat(response.path("data.phone"), is(125635478999l));*/
-
-
-
+        assertThat(spartanPosted.getName(), is(spartan.getName()));
+        assertThat(spartanPosted.getGender(), is(spartan.getGender()));
+        assertThat(spartanPosted.getPhone(), is(spartan.getPhone()));
+        assertThat(spartanPosted.getId(), is(idFromPost));
     }
 }
