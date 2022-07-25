@@ -16,7 +16,7 @@ public class SSLTest {
     }
 
     @Test
-    public void keyStore(){
+    public void keyStore(){//BU SADECE EXAMPLE GERCEK DEGIL
 
         given()
                 .keyStore("pathtofile","password")
