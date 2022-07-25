@@ -1,4 +1,5 @@
 package com.cybertek.day10;
+
 import com.cybertek.pojo.Spartan;
 import com.cybertek.utilities.SpartanTestBase;
 import io.restassured.http.ContentType;
@@ -11,18 +12,19 @@ import java.io.File;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
+
 public class JsonSchemaValidationTest extends SpartanTestBase {
 
     @DisplayName("GET request to verify one spartan against to schema")
     @Test
-    public void schemaValidation(){
+    public void schemaValidation() {
 
         given()
                 .accept(ContentType.JSON)
                 .and()
-                .pathParam("id",10)
+                .pathParam("id", 10)
                 .and()
-                .auth().basic("admin","admin")
+                .auth().basic("admin", "admin")
                 .when()
                 .get("/api/spartans/{id}")
                 .then()
@@ -34,11 +36,11 @@ public class JsonSchemaValidationTest extends SpartanTestBase {
 
     @DisplayName("GET request to all spartans and verify schema")
     @Test
-    public void allSpartanSchemaTest(){
+    public void allSpartanSchemaTest() {
 
         given()
                 .accept(ContentType.JSON)
-                .auth().basic("admin","admin")
+                .auth().basic("admin", "admin")
                 .when()
                 .get("/api/spartans")
                 .then()
@@ -54,7 +56,7 @@ public class JsonSchemaValidationTest extends SpartanTestBase {
     //verify your post response matching with json schema
 
     @Test
-    public void homework(){
+    public void homework() {
 
 
         Spartan spartan = new Spartan();
@@ -63,14 +65,12 @@ public class JsonSchemaValidationTest extends SpartanTestBase {
         spartan.setPhone(125635478999l);
 
         given().accept(ContentType.JSON).and().contentType(ContentType.JSON)
-                .auth().basic("editor","editor")
+                .auth().basic("editor", "editor")
                 .body(spartan).log().all()
                 .when().post("/api/spartans").then()
                 .statusCode(201)
                 .body(JsonSchemaValidator.matchesJsonSchema(new File("src/test/java/com/cybertek/day10/spartanPostJsonSchema.json")));
 
 
-
-
-
-}}
+    }
+}
