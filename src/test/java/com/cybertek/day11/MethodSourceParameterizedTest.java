@@ -1,4 +1,5 @@
 package com.cybertek.day11;
+import com.cybertek.utilities.ExcelUtil;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 
@@ -25,13 +26,13 @@ public class MethodSourceParameterizedTest {
         return  nameList;
     }
 
-    /*public static List<Map<String,String>> getExcelData(){
+    public static List<Map<String,String>> getExcelData(){
         //get your file object
         ExcelUtil vytrackFile = new ExcelUtil("src/test/resources/Vytracktestdata.xlsx","QA3-all");
         //return sheet as a alist of map
         return vytrackFile.getDataList();
 
-    }*/
+    }
 
     @ParameterizedTest
     @MethodSource("getExcelData")
