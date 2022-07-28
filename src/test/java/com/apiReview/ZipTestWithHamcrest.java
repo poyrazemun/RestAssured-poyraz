@@ -15,8 +15,8 @@ public class ZipTestWithHamcrest extends ZipBase{
         given().log().all().accept(ContentType.JSON)
                 .and().pathParam("zip",22031)
                 .when().get("/{zip}")
-                .then().assertThat().statusCode(200).and().contentType("application/json")
-                .and().assertThat().header("Server", equalTo("cloudflare")).header("Report-To",notNullValue())
+                .then().statusCode(200).and().contentType("application/json")
+                .and().header("Server", equalTo("cloudflare")).header("Report-To",notNullValue())
                 .body("country",equalTo("United States"),
                         "'post code'",equalTo("22031"),
                         "places[0].state",equalTo("Virginia"),
