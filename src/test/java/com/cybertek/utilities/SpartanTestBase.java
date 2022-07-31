@@ -22,6 +22,6 @@ public abstract class SpartanTestBase {
 
     @AfterAll
     public static void tearDown() {
-        //DBUtils.destroy();
+        DBUtils.destroy();
     }
 }
